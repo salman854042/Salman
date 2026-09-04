@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>salman - Online Store</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#467ff2;
+    color:#111827;
+}
+
+/* TOP BAR */
+
+.topbar{
+    background:#07111f;
+    color:white;
+    padding:12px 6%;
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+}
+
+/* HEADER */
+
+header{
+    background:white;
+    padding:20px 6%;
+    display:flex;
+    align-items:center;
+    gap:30px;
+    border-bottom:1px solid #eee;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#0879ff;
+}
+
+.search{
+    flex:1;
+    display:flex;
+    max-width:700px;
+    margin:auto;
+}
+
+.search input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:8px 0 0 8px;
+    outline:none;
+}
+
+.search button{
+    width:55px;
+    border:none;
+    background:#0879ff;
+    color:white;
+    border-radius:0 8px 8px 0;
+}
+
+.header-icons{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.cart-btn{
+    border:none;
+    background:none;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.login-btn{
+    background:#063f82;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* NAV */
+
+nav{
+    background:white;
+    padding:0 6%;
+    border-bottom:1px solid #eee;
+}
+
+nav a{
+    display:inline-block;
+    padding:16px 22px;
+    text-decoration:none;
+    color:#111827;
+}
+
+nav a:hover,
+nav a.active{
+    background:#3d52fa;
+    color:lab(0% 0 0);
+    border-radius:6px;
+}
+
+/* HERO */
+
+.hero{
+    margin:20px 5%;
+    min-height:360px;
+    border-radius:15px;
+    background:linear-gradient(120deg,#07131f,#102a40);
+    color:white;
+    display:flex;
+    align-items:center;
+    padding:50px;
+}
+
+.hero-content{
+    max-width:600px;
+}
+
+.hero small{
+    color:#0879ff;
+    font-size:17px;
+}
+
+.hero h1{
+    font-size:48px;
+    line-height:1.15;
+    margin:15px 0;
+}
+
+.hero p{
+    color:#d1d5db;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.btn{
+    background:#0879ff;
+    color:lab(0% 0 0);
+    border:none;
+    padding:14px 25px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+/* SECTION */
+
+.section{
+    padding:20px 6%;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:20px 0;
+}
+
+/* CATEGORY */
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:15px;
+}
+
+.category{
+    background:white;
+    padding:25px 10px;
+    border-radius:10px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.category:hover{
+    transform:translateY(-4px);
+}
+
+.category-icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+/* PRODUCTS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.product{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+    position:relative;
+}
+
+.product-img{
+    height:220px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f2f4f7;
+    font-size:100px;
+}
+
+.discount{
+    position:absolute;
+    top:12px;
+    left:12px;
+    background:#ef4444;
+    color:white;
+    padding:6px 10px;
+    border-radius:5px;
+}
+
+.heart{
+    position:absolute;
+    right:12px;
+    top:12px;
+    background:white;
+    border:none;
+    border-radius:50%;
+    width:35px;
+    height:35px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.product-info{
+    padding:18px;
+}
+
+.product-info h3{
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+.price{
+    color:#f77786;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.old-price{
+    text-decoration:line-through;
+    color:#888;
+    margin-left:8px;
+    font-size:14px;
+}
+
+.product-buttons{
+    margin-top:15px;
+}
+
+.add-cart{
+    width:100%;
+    padding:11px;
+    border:1px solid #ffffff;
+    color:#ebf4fe;
+    background:hwb(237 7% 19%);
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.add-cart:hover{
+    background:#eaf1f9;
+    color:hwb(0 4% 95%);
+}
+
+/* CART */
+
+.cart-panel{
+    position:fixed;
+    right:-420px;
+    top:0;
+    width:400px;
+    height:100vh;
+    background:hwb(0 100% 0%);
+    z-index:1000;
+    box-shadow:-5px 0 20px rgba(0,0,0,.2);
+    padding:25px;
+    transition:.3s;
+    overflow-y:auto;
+}
+
+.cart-panel.open{
+    right:0;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.close-cart{
+    border:none;
+    background:none;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.cart-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.cart-item-img{
+    width:60px;
+    height:60px;
+    background:#f2f4f7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    border-radius:7px;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.quantity{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    margin-top:7px;
+}
+
+.quantity button{
+    width:25px;
+    height:25px;
+    border:1px solid #ddd;
+    background:white;
+    cursor:pointer;
+}
+
+.remove{
+    color:red;
+    border:none;
+    background:none;
+    cursor:pointer;
+}
+
+.cart-total{
+    margin-top:25px;
+    font-size:20px;
+    font-weight:bold;
+    display:flex;
+    justify-content:space-between;
+}
+
+.checkout{
+    width:100%;
+    margin-top:20px;
+}
+
+/* OVERLAY */
+
+.overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:999;
+}
+
+.overlay.show{
+    display:block;
+}
+
+/* LOGIN MODAL */
+
+.login-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.login-overlay.show{
+    display:flex;
+}
+
+.login-box{
+    background:white;
+    width:100%;
+    max-width:420px;
+    padding:30px;
+    border-radius:15px;
+    position:relative;
+    box-shadow:0 10px 40px rgba(162, 10, 10, 0.30196078431372547);
+}
+
+.login-close{
+    position:absolute;
+    right:15px;
+    top:10px;
+    border:none;
+    background:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.login-box h2{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.login-box .subtitle{
+    text-align:center;
+    color:#6c54c5;
+    margin-bottom:20px;
+}
+
+.login-box input{
+    width:100%;
+    padding:13px;
+    margin-bottom:12px;
+    border:1px solid #ddd;
+    border-radius:7px;
+    outline:none;
+}
+
+.login-box input:focus{
+    border-color:lab(0% 0 0);
+}
+
+.login-submit{
+    width:100%;
+    background:#f846fa;
+    color:white;
+    border:none;
+    padding:13px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.login-submit:hover{
+    background:#000000;
+}
+
+.switch{
+    text-align:center;
+    margin-top:15px;
+    color:#000000;
+}
+
+.switch span{
+    color:#000000;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.message{
+    margin-bottom:12px;
+    text-align:center;
+    font-size:14px;
+}
+
+/* ACCOUNT */
+
+.account-box{
+    text-align:center;
+}
+
+.account-box .user-icon{
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+.logout-btn{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    background:#073cc8;
+    color:white;
+    border:none;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:50px;
+    background:#07111f;
+    color:white;
+    padding:40px 6%;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+}
+
+footer h3{
+    margin-bottom:15px;
+}
+
+footer p{
+    color:#cbd5e1;
+    line-height:1.8;
+}
+
+.copyright{
+    border-top:1px solid #334155;
+    margin-top:30px;
+    padding-top:20px;
+    text-align:center;
+    color:#aaa;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .topbar{
+        display:none;
+    }
+
+    header{
+        flex-wrap:wrap;
+        padding:15px;
+    }
+
+    .search{
+        order:3;
+        width:100%;
+    }
+
+    nav{
+        overflow-x:auto;
+        white-space:nowrap;
+        padding:0 10px;
+    }
+
+    .hero{
+        margin:15px;
+        padding:30px;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .categories{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .footer-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:500px){
+
+    .logo{
+        font-size:22px;
+    }
+
+    .header-icons{
+        gap:5px;
+    }
+
+    .hero{
+        min-height:320px;
+        padding:25px;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cart-panel{
+        width:90%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+
+    <div>
+        🚚 Free delivery on orders over!
+    </div>
+
+    <div>
+        📞 01700-000000
+        &nbsp;&nbsp;
+        ✉ salman73854042@gamil.com
+    </div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        🛍️ <span>salman</span>
+    </div>
+
+    <div class="search">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search for products..."
+            onkeyup="searchProducts()"
+        >
+
+        <button>🔍</button>
+
+    </div>
+
+    <div class="header-icons">
+
+        <button class="cart-btn">
+            ♡
+        </button>
+
+        <button class="cart-btn" onclick="openCart()">
+            🛒 <span id="cartCount">0</span>
+        </button>
+
+        <button
+            class="login-btn"
+            onclick="openLogin()"
+            id="accountButton"
+        >
+            👤 Login
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <a href="#" class="active">
+       🏩Home
+    </a>
+
+    <a href="#shop">
+        Shop🏪
+    </a>
+
+    <a href="#categories">
+        Categories💧
+    </a>
+
+    <a href="#about">
+        About Us
+    </a>
+
+    <a href="#contact">
+        Contact Us☎️
+    </a>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <small>
+            Welcome to Store
+        </small>
+
+        <h1>
+            Best Quality Products
+            For Your Life
+        </h1>
+
+        <p>
+            Find the best products with unbeatable prices.
+            Quality you can trust, service you deserve.
+        </p>
+
+        <button
+            class="btn"
+            onclick="goShop()"
+        >
+            Shop Now
+        </button>
+
+    </div>
+<div class=hero-image">
+  <img scr="product png"
+    🚶‍♂️🧍‍♂️🚶‍♀️🕺🕴️
+    alt="🕺🧍‍♂️🕴️🚶‍♀️🧍‍♀️🚶‍♂️👘">
+</div>
+  
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section
+    class="section"
+    id="categories"
+>
+
+    <div class="section-title">
+
+        <h2>
+            Categories
+        </h2>
+
+    </div>
+
+    <div class="categories">
+
+        <div
+            class="category"
+            onclick="filterCategory('Phone')"
+        >
+            <div class="category-icon">
+                📱
+            </div>
+
+            <p>
+                Phones
+            </p>
+        </div>
+
+
+        <div
+            class="category"
+            onclick="filterCategory('Laptop')"
+        >
+            <div class="category-icon">
+                💻
+            </div>
+
+            <p>
+                Laptops
+            </p>
+        </div>
+
+
+        <div
+            class="category"
+            onclick="filterCategory('Headphone')"
+        >
+            <div class="category-icon">
+                🎧
+            </div>
+
+            <p>
+                Accessories
+            </p>
+        </div>
+
+
+        <div
+            class="category"
+            onclick="filterCategory('Watch')"
+        >
+            <div class="category-icon">
+                ⌚
+            </div>
+
+            <p>
+                Smart Watch
+            </p>
+        </div>
+
+
+        <div 
+          class="category"
+          onclick="filterCategory('Camera')"
+          >
+        <div class="category-icon">
+                📷
+            </div>
+
+            <p>
+                Camera
+            </p>
+
+        </div>
+      
+        <div
+          class="category"
+          onclick="filterCategory('dress')"
+          >
+      <div class="category-icon">
+        
+              👗    
+            </div>
+     <p>
+         Dress
+     </p>
+        
+  </div>
+
+          
+        <div class="category">
+
+            <div class="category-icon">
+                🎮
+            </div>
+
+            <p>
+                Gaming
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section
+    class="section"
+    id="shop"
+>
+
+    <div class="section-title">
+
+        <h2>
+            Featured Products
+        </h2>
+
+        <button
+            class="btn"
+            onclick="showAllProducts()"
+        >
+            View All →
+        </button>
+
+    </div>
+
+    <div
+        class="products"
+        id="productList"
+    ></div>
+
+</section>
+
+
+<!-- CART OVERLAY -->
+
+<div
+    class="overlay"
+    id="overlay"
+    onclick="closeCart()"
+></div>
+
+
+<!-- CART -->
+
+<div
+    class="cart-panel"
+    id="cartPanel"
+>
+
+    <div class="cart-header">
+
+        <h2>
+            🛒 Your Cart
+        </h2>
+
+        <button
+            class="close-cart"
+            onclick="closeCart()"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+
+        <span>
+            Total:
+        </span>
+
+        <span id="cartTotal">
+            ৳0
+        </span>
+
+    </div>
+
+    <button
+        class="btn checkout"
+        onclick="checkout()"
+    >
+        Proceed to Checkout
+    </button>
+
+</div>
+
+
+<!-- LOGIN / REGISTER -->
+
+<div
+    class="login-overlay"
+    id="loginOverlay"
+>
+
+    <div class="login-box">
+
+        <button
+            class="login-close"
+            onclick="closeLogin()"
+        >
+            ×
+        </button>
+
+
+        <!-- LOGIN FORM -->
+
+        <div id="loginForm">
+
+            <h2>
+                 Welcome login 
+            </h2>
+
+            <p class="subtitle">
+             login  your account 🤖
+            </p>
+
+            <div
+                class="message"
+                id="loginMessage"
+            ></div>
+
+            <input
+                type="emai, number"
+                id="loginEmai, loginnumber"
+                placeholder="Email addres or number"
+            >
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Password"
+            >
+
+            <button
+                class="login-submit"
+                onclick="login()"
+            >
+                Login🧜‍♂️
+            </button>
+
+            <div class="switch">
+
+                Don't have an account?
+
+                <span onclick="showRegister()">
+                    Register
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- REGISTER FORM -->
+
+        <div
+            id="registerForm"
+            style="display:none;"
+        >
+
+            <h2>
+                Create Account 📝
+            </h2>
+
+            <p class="subtitle">
+                Join Perfect today
+            </p>
+
+            <div
+                class="message"
+                id="registerMessage"
+            ></div>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Full name"
+            >
+
+            <input
+                type="email or number "
+                id="registerEmail or number "
+                placeholder="Email address or number "
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Password"
+            >
+
+            <input
+                type="password"
+                id="registerConfirm"
+                placeholder="Confirm password"
+            >
+
+            <button
+                class="login-submit"
+                onclick="register()"
+            >
+                Create Account
+            </button>
+
+            <div class="switch">
+
+                Already have an account?
+
+                <span onclick="showLogin()">
+                    Login
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <div
+            id="accountForm"
+            style="display:none;"
+            class="account-box"
+        >
+
+            <div class="user-icon">
+                👨‍🦱
+            </div>
+
+            <h2>
+                My Account
+            </h2>
+
+            <p
+                id="userName"
+                style="margin-top:10px;"
+            ></p>
+
+            <p
+                id="userEmail"
+                style="color:#777;margin-top:5px;"
+            ></p>
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer id="contact">
+
+    <div class="footer-grid">
+
+        <div>
+
+            <h3>
+                Perfect
+            </h3>
+
+            <p>
+                Your trusted online shopping destination.
+                Best products, best prices and best service.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <p>
+                Home
+            </p>
+
+            <p>
+                Shop
+            </p>
+
+            <p>
+                Categories
+            </p>
+
+            <p>
+                About Us
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Customer Service
+            </h3>
+
+            <p>
+                Help Center
+            </p>
+
+            <p>
+                Delivery Information
+            </p>
+
+            <p>
+                Return Policy
+            </p>
+
+            <p>
+                Privacy Policy
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                📞 01700-000000
+            </p>
+
+            <p>
+                ✉ salman73854042@gmail.com
+            </p>
+
+            <p>
+                📍 Dhaka, Bangladesh
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 Perfect. All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   PRODUCTS
+========================= */
+
+const products = [
+
+    {
+        id:1,
+        name:"iPhone 14 Pro Max",
+        price:135000,
+        oldPrice:159000,
+        discount:"-15%",
+        category:"Phone",
+        image:"📱"
+    },
+
+    {
+        id:2,
+        name:"Asus ROG Strix G15",
+        price:126000,
+        oldPrice:140000,
+        discount:"-10%",
+        category:"Laptop",
+        image:"💻"
+    },
+
+    {
+        id:3,
+        name:"Sony WH-1000XM4",
+        price:24990,
+        oldPrice:29990,
+        discount:"",
+        category:"Headphone",
+        image:"🎧"
+    },
+
+    {
+        id:4,
+        name:"Apple Watch Series 8",
+        price:45500,
+        oldPrice:52000,
+        discount:"",
+        category:"Watch",
+        image:"⌚"
+    },
+
+    {
+        id:5,
+        name:"Samsung Galaxy S24",
+        price:99999,
+        oldPrice:115000,
+        discount:"-13%",
+        category:"Phone",
+        image:"📱"
+    },
+
+    {
+        id:6,
+        name:"MacBook Air M2",
+        price:108000,
+        oldPrice:120000,
+        discount:"-10%",
+        category:"Laptop",
+        image:"💻"
+    },
+
+    {
+        id:7,
+        name:"AirPods Pro",
+        price:22000,
+        oldPrice:26000,
+        discount:"-15%",
+        category:"Headphone",
+        image:"🎧"
+    },
+
+    {
+        id:8,
+        name:"Samsung Galaxy Watch",
+        price:28000,
+        oldPrice:32000,
+        discount:"-12%",
+        category:"Watch",
+        image:"⌚"
+    },
+    {
+        id:9,
+        name:"pakhi ",
+        price:1000,
+        oldprice:1500,
+        discount:"-5%",
+        category :"Dress",
+        image:"👗"
+    }
+      
+];
+
+
+/* =========================
+   CART
+========================= */
+
+let cart = [];
+
+
+/* =========================
+   DISPLAY PRODUCTS
+========================= */
+
+function displayProducts(list=products){
+
+    const productList =
+        document.getElementById("productList");
+
+    productList.innerHTML="";
+
+    if(list.length===0){
+
+        productList.innerHTML=
+            "<h3>No products found.</h3>";
+
+        return;
+    }
+
+    list.forEach(product=>{
+
+        productList.innerHTML += `
+
+            <div class="product">
+
+                ${
+                    product.discount
+                    ?
+                    `<div class="discount">
+                        ${product.discount}
+                    </div>`
+                    :
+                    ""
+                }
+
+                <button
+                    class="heart"
+                    onclick="addWishlist()"
+                >
+                    ♡
+                </button>
+
+                <div class="product-img">
+                    ${product.image}
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        ${product.name}
+                    </h3>
+
+                    <span class="price">
+                        ৳${product.price.toLocaleString()}
+                    </span>
+
+                    <span class="old-price">
+                        ৳${product.oldPrice.toLocaleString()}
+                    </span>
+
+                    <div class="product-buttons">
+
+                        <button
+                            class="add-cart"
+                            onclick="addToCart(${product.id})"
+                        >
+                            🛒 Add to Cart
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+function addToCart(id){
+
+    const product =
+        products.find(p=>p.id===id);
+
+    const existing =
+        cart.find(item=>item.id===id);
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        cart.push({
+            ...product,
+            quantity:1
+        });
+
+    }
+
+    updateCart();
+
+    openCart();
+
+}
+
+
+/* =========================
+   UPDATE CART
+========================= */
+
+function updateCart(){
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    const cartCount =
+        document.getElementById("cartCount");
+
+    const cartTotal =
+        document.getElementById("cartTotal");
+
+    cartItems.innerHTML="";
+
+    let total=0;
+    let count=0;
+
+    cart.forEach(item=>{
+
+        total += item.price * item.quantity;
+
+        count += item.quantity;
+
+        cartItems.innerHTML += `
+
+            <div class="cart-item">
+
+                <div class="cart-item-img">
+                    ${item.image}
+                </div>
+
+                <div class="cart-item-info">
+
+                    <h4>
+                        ${item.name}
+                    </h4>
+
+                    <p>
+                        ৳${item.price.toLocaleString()}
+                    </p>
+
+                    <div class="quantity">
+
+                        <button
+                            onclick="changeQuantity(${item.id},-1)"
+                        >
+                            -
+                        </button>
+
+                        <span>
+                            ${item.quantity}
+                        </span>
+
+                        <button
+                            onclick="changeQuantity(${item.id},1)"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="remove"
+                    onclick="removeFromCart(${item.id})"
+                >
+                    🗑️
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+    cartCount.innerText=count;
+
+    cartTotal.innerText=
+        "৳"+total.toLocaleString();
+
+}
+
+
+/* =========================
+   CHANGE QUANTITY
+========================= */
+
+function changeQuantity(id,change){
+
+    const item =
+        cart.find(item=>item.id===id);
+
+    if(!item) return;
+
+    item.quantity += change;
+
+    if(item.quantity<=0){
+
+        cart =
+            cart.filter(item=>item.id!==id);
+
+    }
+
+    updateCart();
+
+}
+
+
+/* =========================
+   REMOVE
+========================= */
+
+function removeFromCart(id){
+
+    cart =
+        cart.filter(item=>item.id!==id);
+
+    updateCart();
+
+}
+
+
+/* =========================
+   CART OPEN/CLOSE
+========================= */
+
+function openCart(){
+
+    document
+        .getElementById("cartPanel")
+        .classList.add("open");
+
+    document
+        .getElementById("overlay")
+        .classList.add("show");
+
+}
+
+function closeCart(){
+
+    document
+        .getElementById("cartPanel")
+        .classList.remove("open");
+
+    document
+        .getElementById("overlay")
+        .classList.remove("show");
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchProducts(){
+
+    const text =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const result =
+        products.filter(product=>
+            product.name
+            .toLowerCase()
+            .includes(text)
+        );
+
+    displayProducts(result);
+
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+function filterCategory(category){
+
+    const result =
+        products.filter(product=>
+            product.category===category
+        );
+
+    displayProducts(result);
+
+    document
+        .getElementById("shop")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* =========================
+   SHOW ALL
+========================= */
+
+function showAllProducts(){
+
+    displayProducts(products);
+
+}
+
+
+/* =========================
+   SHOP
+========================= */
+
+function goShop(){
+
+    document
+        .getElementById("shop")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+function addWishlist(){
+
+    alert(
+        "❤️ Product added to wishlist!"
+    );
+
+}
+
+
+/* =========================
+   CHECKOUT
+========================= */
+
+function checkout(){
+
+    if(cart.length===0){
+
+        alert(
+            "Your cart is empty!"
+        );
+
+        return;
+    }
+
+    const loggedIn =
+        localStorage.getItem("perfectLoggedIn");
+
+    if(loggedIn!=="true"){
+
+        alert(
+            "Please Login/Register before checkout."
+        );
+
+        openLogin();
+
+        return;
+    }
+
+    alert(
+        "✅ Checkout successful demo!"
+    );
+
+}
+
+
+/* =================================================
+   LOGIN / REGISTER SYSTEM
+================================================= */
+
+
+/* OPEN LOGIN */
+
+function openLogin(){
+
+    document
+        .getElementById("loginOverlay")
+        .classList.add("show");
+
+    updateAccountView();
+
+}
+
+
+/* CLOSE LOGIN */
+
+function closeLogin(){
+
+    document
+        .getElementById("loginOverlay")
+        .classList.remove("show");
+
+}
+
+
+/* SHOW LOGIN */
+
+function showLogin(){
+
+    document
+        .getElementById("loginForm")
+        .style.display="block";
+
+    document
+        .getElementById("registerForm")
+        .style.display="none";
+
+    document
+        .getElementById("accountForm")
+        .style.display="none";
+
+}
+
+
+/* SHOW REGISTER */
+
+function showRegister(){
+
+    document
+        .getElementById("loginForm")
+        .style.display="none";
+
+    document
+        .getElementById("registerForm")
+        .style.display="block";
+
+    document
+        .getElementById("accountForm")
+        .style.display="none";
+
+}
+
+
+/* REGISTER */
+
+function register(){
+
+    const name =
+        document
+        .getElementById("registerName")
+        .value
+        .trim();
+
+  {const email =
+        document
+        .getElementById("registerEmail or registenumber")
+        .value
+        .trim();
+  const number= 
+    document
+ . getElementById("registernumber")
+ . value
+ . trim()  }
+    const password =
+        document
+        .getElementById("registerPassword")
+        .value;
+
+    const confirm =
+        document
+        .getElementById("registerConfirm")
+        .value;
+
+    const message =
+        document
+        .getElementById("registerMessage");
+
+
+    if(!name || !email || number || !password || !confirm){
+
+        message.innerText =
+            "⚠️ Please fill all fields.";
+
+        message.style.color="red";
+
+        return;
+    }
+
+
+    if(password.length<6){
+
+        message.innerText =
+            "⚠️ Password must be at least 6 characters.";
+
+        message.style.color="red";
+
+        return;
+    }
+
+
+    if(password!==confirm){
+
+        message.innerText =
+            "❌ Passwords do not match.";
+
+        message.style.color="red";
+
+        return;
+    }
+
+
+    const user = {
+
+        name:name,
+        email:email, number, 
+        password:password
+    
+
+    }
+
+
+    localStorage.setItem(
+        "perfectUser",
+        JSON.stringify(user)
+    );
+
+
+    localStorage.setItem(
+        "perfectLoggedIn",
+        "true"
+    );
+
+
+    message.innerText =
+        "✅ Account created successfully!";
+
+    message.style.color="green";
+
+
+    setTimeout(()=>{
+
+        updateAccountView();
+
+    },700);
+
+}
+
+
+/* LOGIN */
+
+function login(){
+
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+     const number =
+        document
+        . getElementById("loginnumber")
+        . value
+        .trim();
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+    const message =
+        document
+        .getElementById("loginMessage");
+
+
+    const savedUser =
+        localStorage.getItem("perfectUser");
+
+
+    if(!savedUser){
+
+        message.innerText =
+            "❌ Account not found. Please Register first.";
+
+        message.style.color="red";
+
+        return;
+    }
+
+
+    const user =
+        JSON.parse(savedUser);
+
+
+    if(
+        email===user.email &&
+  
+        number===user.number&&
+      
+        password===user.password
+    ){
+
+        localStorage.setItem(
+            "perfectLoggedIn",
+            "true"
+        );
+
+
+        message.innerText =
+            "✅ Login successful!";
+
+        message.style.color="green";
+
+
+        setTimeout(()=>{
+
+            updateAccountView();
+
+        },500);
+
+
+    }else{
+
+        message.innerText =
+            "❌ Email or number  or password is incorrect.";
+
+        message.style.color="red";
+
+    }
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+    localStorage.setItem(
+        "perfectLoggedIn",
+        "false"
+    );
+
+    showLogin();
+
+    updateAccountButton();
+
+}
+
+
+/* ACCOUNT VIEW */
+
+function updateAccountView(){
+
+    const loggedIn =
+        localStorage.getItem("perfectLoggedIn");
+
+    const savedUser =
+        localStorage.getItem("perfectUser");
+
+
+    if(
+        loggedIn==="true" &&
+        savedUser
+    ){
+
+        const user =
+            JSON.parse(savedUser);
+
+
+        document
+            .getElementById("loginForm")
+            .style.display="none";
+
+        document
+            .getElementById("registerForm")
+            .style.display="none";
+
+        document
+            .getElementById("accountForm")
+            .style.display="block";
+
+
+        document
+            .getElementById("userName")
+            .innerText=
+            "Name: "+user.name;
+
+        document
+           . getElementById("loginnumber")
+          . innerText=
+          "number: "+number;
+        document
+            .getElementById("useremail")
+            .innerText=
+            "Email: "+user.email;
+
+    }else{
+
+        showLogin();
+
+    }
+
+    updateAccountButton();
+
+}
+
+
+/* ACCOUNT BUTTON */
+
+function updateAccountButton(){
+
+    const button =
+        document.getElementById("accountButton");
+
+    const loggedIn =
+        localStorage.getItem("perfectLoggedIn");
+
+    const savedUser =
+        localStorage.getItem("perfectUser");
+
+
+    if(
+        loggedIn==="true" &&
+        savedUser
+    ){
+
+        const user =
+            JSON.parse(savedUser);
+
+        button.innerText =
+            "👤 "+user.name;
+
+    }else{
+
+        button.innerText =
+            "👤 Login";
+
+    }
+
+}
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+displayProducts();
+
+updateCart();
+
+updateAccountButton();
+
+</script>
+
+</body>
+</html>
